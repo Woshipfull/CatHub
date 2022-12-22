@@ -23,5 +23,9 @@ module.exports = {
     'react/react-in-jsx-scope': 0,
     'react/jsx-indent': 0,
     'no-console': 0,
+    'operator-linebreak': 0,
+    'implicit-arrow-linebreak': 0,
+    'no-confusing-arrow': 0,
+    'react/prop-types': 0,
   },
 };

@@ -1,0 +1,200 @@
+$light: #f8f8f7;
+$dark: #1d1d1d;
+$pink-light: #fbe0dc;
+$pink: #ff868e;
+$white: #fff;
+$grey: #8c8c8c;
+$grey-light: #f8f8f7;
+
+.main-container {
+  --bg-color: #{$light};
+  --bg-color-home: #{$pink-light};
+
+  background-color: var(--bg-color);
+
+  .content {
+    background-color: #{$white};
+  }
+}
+
+.home {
+  background-color: var(--bg-color-home);
+}
+
+.menu {
+  background-color: var(--bg-color);
+}
+
+.theme-swither {
+  .theme-icon {
+    background-color: #{$pink-light};
+    color: #{$pink};
+  }
+  .slider {
+    background-color: #ccc;
+  }
+  .slider:before {
+    background-color: white;
+  }
+  input:checked + .slider {
+    background-color: #2196f3;
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196f3;
+  }
+}
+
+.logo {
+  color: #{$dark};
+  :nth-child(2) {
+    background-color: rgb(255, 149, 0);
+  }
+  &:hover {
+    background-color: #{$pink-light};
+  }
+}
+
+.select {
+  select {
+    background-color: #{$grey-light};
+    color: #{$grey};
+  }
+
+  &.secondary {
+    color: #{$grey};
+    select {
+      background-color: #{$white};
+      color: #{$dark};
+    }
+  }
+}
+
+.btn-light {
+  background-color: #{$white};
+  svg {
+    color: #{$pink};
+  }
+
+  &.heart-icon svg {
+    stroke: #{$pink};
+    fill: #{$white};
+  }
+
+  &:hover {
+    background-color: #{$pink-light};
+    .heart-icon svg {
+      fill: #{$pink-light};
+    }
+  }
+
+  &.active {
+    background-color: #{$pink};
+
+    svg {
+      color: #{$white};
+    }
+
+    &.heart-icon svg {
+      stroke: #{$white};
+      fill: #{$pink};
+    }
+  }
+}
+
+.btn-dark {
+  background-color: #{$pink-light};
+  color: #{$pink};
+  &:hover {
+    background-color: #{$pink};
+    color: #{$white};
+  }
+}
+
+.btn-primary {
+  background-color: #{$grey-light};
+  border: 2px solid transparent;
+  color: #{$grey};
+  svg {
+    color: #{$grey};
+  }
+  &:hover {
+    color: #{$pink};
+    svg {
+      color: #{$pink};
+    }
+  }
+  &.active {
+    border-color: #{$pink};
+    color: #{$pink};
+    svg {
+      color: #{$pink};
+    }
+  }
+}
+
+.menu-btn {
+  background-color: transparent;
+}
+
+.main-container.dark {
+  --bg-color: #{$dark};
+}
+
+.gallery .overlay {
+  background-color: rgba(255, 134, 142, 0.6);
+}
+
+.breadcrumb {
+  .page-label {
+    background-color: #{$pink-light};
+    color: #{$pink};
+  }
+  > :last-child {
+    background-color: #{$pink};
+    color: #{$white};
+  }
+}
+
+.gallery-item .overlay .title {
+  background-color: #{$grey-light};
+  color: #{$pink};
+
+  &:hover {
+    color: #{$grey};
+  }
+}
+
+.breed-id-content .info .box {
+  border-color: $pink;
+  .description {
+    color: $grey;
+  }
+  .option {
+    :nth-child(2) {
+      color: $grey;
+    }
+  }
+}
+
+.no-item {
+  background-color: $grey-light;
+  color: $grey;
+}
+
+.gallery-filters {
+  background-color: $grey-light;
+}
+
+.upload-modal {
+  background-color: rgba(29, 29, 29, 0.6);
+
+  @media screen and (max-width: 1200px) {
+    background-color: $grey-light;
+    .content {
+      background-color: $grey-light;
+    }
+  }
+}
+
+// ------ NAVIGATION --------

@@ -1,0 +1,120 @@
+.gallery-container {
+  display: grid;
+  gap: 15px;
+
+  @media screen and (max-width: 700px) {
+    gap: 0;
+  }
+
+  .gallery {
+    width: 100%;
+    height: 500px;
+    display: grid;
+    gap: 15px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+
+    :nth-child(1) {
+      grid-area: first;
+    }
+    :nth-child(2) {
+      grid-area: second;
+    }
+    :nth-child(3) {
+      grid-area: third;
+    }
+    :nth-child(4) {
+      grid-area: fourth;
+    }
+    :nth-child(5) {
+      grid-area: fifth;
+    }
+
+    &.grid-1 {
+      grid-template-areas:
+        'first second third'
+        'first fourth fourth'
+        'fifth fourth fourth';
+    }
+
+    &.grid-2 {
+      grid-template-areas:
+        'first second third'
+        'fourth fourth third'
+        'fourth fourth fifth';
+    }
+
+    @media screen and (max-width: 450px) {
+      height: 900px;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
+      &.grid-1,
+      &.grid-2 {
+        grid-template-areas: 'first' 'second' 'third' 'fourth' 'fifth';
+      }
+    }
+
+    @media screen and (min-width: 450px) and (max-width: 700px) {
+      height: 1250px;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
+      &.grid-1,
+      &.grid-2 {
+        grid-template-areas: 'first' 'second' 'third' 'fourth' 'fifth';
+      }
+    }
+
+    @media screen and (min-width: 800px) and (max-width: 1200px) {
+      height: 800px;
+    }
+
+    @media screen and (min-width: 700px) and (max-width: 800px) {
+      height: 600px;
+    }
+  }
+
+  .gallery-item {
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+
+    .overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+
+      opacity: 0;
+      transition: opacity 200ms ease;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      .like {
+        align-self: center;
+      }
+
+      .title {
+        align-self: flex-end;
+        height: 2rem;
+        width: calc(100% - 20px);
+        margin-bottom: 10px;
+        border-radius: 10px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        cursor: pointer;
+      }
+    }
+
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

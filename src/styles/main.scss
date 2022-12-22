@@ -1,0 +1,26 @@
+@import './normalize.scss';
+@import './fonts.scss';
+@import './layouts.scss';
+@import './colors.scss';
+
+// ------    PAGES    ------
+
+@import './pages/start-page.scss';
+@import './pages/home.scss';
+@import './pages/breeds.scss';
+@import './pages/gallery-page.scss';
+
+// ----    COMPONENTS    ----
+
+@import './components/menu.scss';
+@import './components/theme-switcher.scss';
+@import './components/logo.scss';
+@import './components/gallery.scss';
+@import './components/select.scss';
+@import './components/buttons.scss';
+@import './components/navigation.scss';
+@import './components/bar.scss';
+@import './components/search.scss';
+@import './components/pagination.scss';
+@import './components/no-item.scss';
+@import './components/upload-modal.scss';

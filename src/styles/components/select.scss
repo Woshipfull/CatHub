@@ -1,0 +1,31 @@
+.select {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .label {
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    font-weight: 400;
+    padding-left: 0.5rem;
+  }
+
+  select {
+    height: 40px;
+    width: 100%;
+    font-family: 'Jost';
+    font-size: 15px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding: 0 7px;
+  }
+
+  @media screen and (max-width: 400px) {
+    .label {
+      font-size: 0.5rem;
+    }
+    select {
+      height: 32px;
+    }
+  }
+}

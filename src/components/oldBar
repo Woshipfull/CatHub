@@ -1,0 +1,35 @@
+<button type="button" className="btn d-none">
+        <div className="btn-icon">
+          <VscMenu />
+        </div>
+      </button>
+      <div className="search-form">
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Search for breeds by name"
+        />
+        <button className="search-botton" type="submit">
+          <div className="btn-icon">
+            <BsSearch />
+          </div>
+        </button>
+      </div>
+      <div className="bar-btns">
+        <button type="button" className="btn">
+          <div className="btn-icon">
+            <BsEmojiSmile />
+          </div>
+        </button>
+        <button type="button" className="btn">
+          <div className="btn-icon heart-icon">
+            <HiHeart />
+          </div>
+        </button>
+        <button type="button" className="btn">
+          <div className="btn-icon">
+            <BsEmojiFrown />
+          </div>
+        </button>
+      </div>
+    </div>

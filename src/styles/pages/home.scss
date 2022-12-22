@@ -1,0 +1,13 @@
+.home {
+  height: 100%;
+  border-radius: 20px;
+  background-color: var(--bg-color-home);
+
+  .home-image {
+    position: absolute;
+    width: 57%;
+    top: -3.5rem;
+    right: -1rem;
+    image-resolution: 300dpi;
+  }
+}
