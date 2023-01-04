@@ -13,7 +13,7 @@ const BreedsId = () => {
 
   const renderContent = () => {
     if (data === undefined) {
-      return <NoItemFound />;
+      return <NoItemFound message="No item found" />;
     }
     return (
       <div className="breed-id-content">
@@ -74,7 +74,7 @@ const BreedsId = () => {
         </div>
       </div>
 
-      <div className="scroll-content">{renderContent()}</div>
+      {renderContent()}
     </>
   );
 };

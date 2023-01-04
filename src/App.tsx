@@ -8,13 +8,13 @@ import MainComponent from './components/layouts/MainComponent';
 
 import Breeds from './components/pages/Breeds';
 import Gallery from './components/pages/Gallery';
-import Voiting from './components/pages/Voiting';
+import Votes from './components/pages/Votes';
 import NotFound from './components/pages/NotFound';
-import Favourites from './components/pages/Favourites';
 
 import Home from './components/pages/Home';
 import StartPage from './components/pages/StartPage';
 import BreedsIDPage from './components/pages/BreedID';
+import Favourites from './components/pages/Favourites';
 
 const App = () => {
   const { state, dispatch } = useContext(GlobalStore);
@@ -37,10 +37,13 @@ const App = () => {
       >
         {(matches) => (
           <Routes>
-            <Route path="/" element={matches.pc ? <PCLayout /> : <TabletLayout />}>
+            <Route
+              path="/"
+              element={matches.pc ? <PCLayout /> : <TabletLayout />}
+            >
               <Route index element={matches.pc ? <Home /> : <StartPage />} />
               <Route element={<MainComponent />}>
-                <Route path="voiting" element={<Voiting />} />
+                <Route path="votes" element={<Votes />} />
                 <Route path="breeds" element={<Breeds />} />
                 <Route path="breeds/:breedId" element={<BreedsIDPage />} />
                 <Route path="gallery" element={<Gallery />} />

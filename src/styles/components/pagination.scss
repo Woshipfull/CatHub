@@ -1,11 +1,10 @@
 .pagination {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(11, max-content);
   justify-content: center;
   align-items: center;
   gap: 5px;
+  align-self: end;
 
-  :nth-child(1),
-  :nth-last-child(1) {
-    flex-grow: 1;
-  }
+  overflow: hidden;
 }

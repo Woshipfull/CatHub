@@ -3,3 +3,15 @@
   border-radius: 10px;
   padding: 1rem 1.5rem;
 }
+
+.link {
+  transition: transform 300ms;
+
+  span {
+    font-weight: 400;
+  }
+
+  &:hover {
+    transform: scale(1.01);
+  }
+}

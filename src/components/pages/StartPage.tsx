@@ -14,9 +14,12 @@ const StartPage = () => {
         </div>
         {userName ? (
           <>
-            <div className="main-titles">
-              <h1>Welcome to CatHub ocean!</h1>
-              <h2>Enjoy!</h2>
+            <div className="welcome">
+              <h1>
+                Welcome to
+                <span> CatHub </span>
+                ocean!
+              </h1>
             </div>
             <div>
               <Navigation />

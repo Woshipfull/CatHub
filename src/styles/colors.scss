@@ -1,10 +1,12 @@
 $light: #f8f8f7;
 $dark: #1d1d1d;
 $pink-light: #fbe0dc;
+$another-light: #ffd280;
 $pink: #ff868e;
 $white: #fff;
 $grey: #8c8c8c;
 $grey-light: #f8f8f7;
+$success: #97eab9;
 
 .main-container {
   --bg-color: #{$light};
@@ -76,7 +78,7 @@ $grey-light: #f8f8f7;
     color: #{$pink};
   }
 
-  &.heart-icon svg {
+  .heart-icon svg {
     stroke: #{$pink};
     fill: #{$white};
   }
@@ -84,7 +86,7 @@ $grey-light: #f8f8f7;
   &:hover {
     background-color: #{$pink-light};
     .heart-icon svg {
-      fill: #{$pink-light};
+      fill: #{$pink};
     }
   }
 
@@ -95,9 +97,20 @@ $grey-light: #f8f8f7;
       color: #{$white};
     }
 
-    &.heart-icon svg {
+    .heart-icon svg {
       stroke: #{$white};
       fill: #{$pink};
+    }
+
+    &:hover {
+      background-color: #{$pink-light};
+      svg {
+        color: #{$pink};
+      }
+      .heart-icon svg {
+        stroke: #{$pink};
+        fill: #{$pink-light};
+      }
     }
   }
 }
@@ -105,9 +118,30 @@ $grey-light: #f8f8f7;
 .btn-dark {
   background-color: #{$pink-light};
   color: #{$pink};
+
+  .heart-icon svg {
+    stroke: #{$pink};
+    fill: #{$pink-light};
+  }
+
   &:hover {
     background-color: #{$pink};
     color: #{$white};
+
+    .heart-icon svg {
+      stroke: #{$white};
+      fill: #{$pink};
+    }
+  }
+
+  &.active {
+    background-color: #{$pink};
+    color: #{$white};
+
+    .heart-icon svg {
+      stroke: #{$white};
+      fill: #{$pink};
+    }
   }
 }
 
@@ -186,15 +220,178 @@ $grey-light: #f8f8f7;
   background-color: $grey-light;
 }
 
-.upload-modal {
-  background-color: rgba(29, 29, 29, 0.6);
+.navigation {
+  .username {
+    background-image: linear-gradient(90deg, $white, 80%, transparent);
+    span {
+      color: $pink;
+    }
+  }
 
-  @media screen and (max-width: 1200px) {
-    background-color: $grey-light;
-    .content {
-      background-color: $grey-light;
+  .page-links .nav-card {
+    .nav-image {
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+
+    .nav-btn {
+      background-color: #{$white};
+      color: #{$pink};
+    }
+
+    &:hover {
+      .nav-image {
+        border-color: rgba(255, 255, 255, 1);
+      }
+
+      .nav-btn {
+        background-color: #{$pink-light};
+      }
+    }
+
+    &.active {
+      .nav-image {
+        border-color: #{$pink-light};
+      }
+
+      .nav-btn {
+        color: #{$white};
+        background-color: #{$pink};
+      }
+    }
+  }
+
+  :nth-child(1) {
+    .nav-image {
+      background: #b4b7ff;
+    }
+  }
+
+  :nth-child(2) {
+    .nav-image {
+      background: #97eab9;
+    }
+  }
+
+  :nth-child(3) {
+    .nav-image {
+      background: #ffd280;
     }
   }
 }
 
-// ------ NAVIGATION --------
+.upload-modal {
+  .content {
+    background-color: $grey-light;
+  }
+
+  &.show {
+    animation: fadeIn 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+
+  .upload-description {
+    color: $grey;
+
+    a {
+      color: $pink;
+    }
+  }
+
+  .upload-input-label span {
+    color: $grey;
+  }
+
+  .upload-input {
+    border-color: $pink-light;
+    background-color: $white;
+    &.failed {
+      border-color: $pink;
+      background-color: $pink-light;
+    }
+  }
+
+  .file-name {
+    color: $grey;
+  }
+
+  .status-message {
+    background-color: $white;
+    color: $grey;
+
+    .svg-success {
+      color: $success;
+    }
+
+    .svg-failed {
+      color: $pink;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    background: rgba(0, 0, 0, 0);
+  }
+  100% {
+    background: rgba(29, 29, 29, 0.8);
+  }
+}
+
+.votes-content {
+  .votes-item {
+    border-color: $pink-light;
+  }
+
+  .votes-item-title {
+    background-image: linear-gradient(
+      90deg,
+      #fbe0dc 30%,
+      #e1fbdc 60%,
+      transparent 100%
+    );
+    color: $pink;
+  }
+
+  .history-card {
+    background-color: $grey-light;
+
+    .history-date-container {
+      background-color: $white;
+      color: $grey;
+    }
+
+    .history-text {
+      color: $grey;
+      .img-id {
+        color: $dark;
+      }
+    }
+
+    .history-icon {
+      &.removed {
+        color: $pink;
+      }
+      &.Likes {
+        color: $success;
+      }
+      &.Dislikes {
+        color: $another-light;
+      }
+    }
+  }
+}
+
+.no-item .link {
+  span {
+    color: $pink;
+  }
+}
+
+.start-page .welcome {
+  color: $grey;
+
+  span {
+    color: $pink;
+  }
+}
+
+// ----------  SEARCH  -------------

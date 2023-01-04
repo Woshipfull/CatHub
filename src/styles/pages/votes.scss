@@ -1,0 +1,109 @@
+.votes-controls {
+  display: flex;
+  width: max-content;
+  gap: 5px;
+  justify-content: flex-end;
+  justify-self: flex-end;
+}
+
+.votes-content {
+  display: grid;
+  grid-gap: 10px;
+}
+
+.votes-item {
+  display: grid;
+  grid-gap: 10px;
+
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.votes-item-title {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 7px 0 0 7px;
+}
+
+.history-card {
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+  grid-template-areas: 'date text icon';
+  gap: 5px;
+  border-radius: 10px;
+  padding: 10px;
+
+  .history-date-container {
+    display: grid;
+    grid-area: date;
+    width: 60px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    justify-content: center;
+  }
+
+  .history-date {
+    display: flex;
+    flex-direction: column;
+    font-weight: 400;
+    font-size: 0.7rem;
+    line-height: 0.8rem;
+  }
+
+  .history-text {
+    width: 100%;
+    display: grid;
+    grid-area: text;
+    align-items: center;
+    padding-left: 5px;
+    font-size: 0.9rem;
+
+    p {
+      height: max-content;
+      font-weight: 400;
+    }
+
+    .img-id {
+      font-weight: 500;
+    }
+  }
+
+  .history-icon {
+    display: grid;
+    grid-area: icon;
+    width: max-content;
+    justify-self: end;
+    align-items: center;
+
+    svg {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      'date icon'
+      'text text';
+
+    .history-date-container {
+      width: max-content;
+    }
+
+    .history-date {
+      flex-direction: row;
+      width: max-content;
+      gap: 6px;
+    }
+
+    .history-icon svg {
+      font-size: 1rem;
+    }
+  }
+}

@@ -38,3 +38,32 @@ export type GalleryFilterState = {
   breed: string;
   type: string;
 };
+
+export type VotesItem = {
+  id: number;
+  imageId: string;
+  createdAt: string;
+  value: number;
+  image: {
+    id: string;
+    url: string;
+  };
+  result: {
+    action: string;
+    fromTo: string;
+  };
+};
+
+export type VotesColl = Array<VotesItem>;
+
+export type FavouritesItem = {
+  id: number,
+  imageId: string,
+  createdAt: string,
+  image: {
+    id: string,
+    url: string,
+  }
+};
+
+export type FavouritesColl = Array<FavouritesItem>;

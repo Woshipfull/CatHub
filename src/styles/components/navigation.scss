@@ -15,8 +15,6 @@
       display: flex;
       align-items: center;
       border-radius: 10px 0 0 10px;
-      background-image: linear-gradient(90deg, #fff 80%, transparent);
-      
 
       span {
         text-decoration: underline;
@@ -25,7 +23,8 @@
         letter-spacing: 1px;
         padding-left: 1rem;
         margin-bottom: 0.2rem;
-        color: $pink;
+
+        cursor: default;
       }
     }
 
@@ -51,10 +50,7 @@
       pointer-events: none;
       border-radius: 20px;
       border: 5px solid;
-      border-color: rgba(255, 255, 255, 0.6);
       display: flex;
-
-      transition: border-color 500ms;
 
       img {
         width: 7rem;
@@ -68,56 +64,14 @@
       pointer-events: none;
       padding: 0.5rem 0;
       margin-top: 0.6rem;
-      background-color: #{$white};
+
       border-radius: 10px;
 
-      color: #{$pink};
       font-weight: 500;
       font-size: 0.9rem;
       text-align: center;
       text-transform: uppercase;
       letter-spacing: 2px;
-
-      transition: background-color 500ms, color 500ms;
-    }
-
-    &:hover {
-      .nav-image {
-        border-color: rgba(255, 255, 255, 1);
-      }
-
-      .nav-btn {
-        background-color: #{$pink-light};
-      }
-    }
-
-    &.active {
-      .nav-image {
-        border-color: #{$pink-light};
-      }
-
-      .nav-btn {
-        color: #{$white};
-        background-color: #{$pink};
-      }
-    }
-  }
-
-  :nth-child(1) {
-    .nav-image {
-      background: #b4b7ff;
-    }
-  }
-
-  :nth-child(2) {
-    .nav-image {
-      background: #97eab9;
-    }
-  }
-
-  :nth-child(3) {
-    .nav-image {
-      background: #ffd280;
     }
   }
 }

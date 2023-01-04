@@ -18,9 +18,9 @@ type NavProps = {
 };
 
 const navItemsArray: NavItemsArray = [
-  { imgSrc: '/images/vote-table.png', href: 'voiting', btn: 'voiting' },
-  { imgSrc: '/images/pet-breeds.png', href: 'breeds', btn: 'breeds' },
   { imgSrc: '/images/images-search.png', href: 'gallery', btn: 'gallery' },
+  { imgSrc: '/images/pet-breeds.png', href: 'breeds', btn: 'breeds' },
+  { imgSrc: '/images/vote-table.png', href: 'votes', btn: 'my votes' },
 ];
 
 const Navigation: React.FC<NavProps> = ({ setShowMenu }) => {
@@ -42,7 +42,7 @@ const Navigation: React.FC<NavProps> = ({ setShowMenu }) => {
           <span>{userName}</span>
         </div>
         <div className="user-btns">
-          <Link to="favourites">
+          <Link to="favourites" onClick={() => setShowMenu(false)}>
             <button type="button" className="btn btn-dark sm-btn">
               <div className="btn-icon">
                 <HiHeart />
@@ -75,7 +75,7 @@ const Navigation: React.FC<NavProps> = ({ setShowMenu }) => {
               <div className="nav-image">
                 <img src={item.imgSrc} alt={item.href} />
               </div>
-              <div className="nav-btn">{item.href}</div>
+              <div className="nav-btn">{item.btn}</div>
             </Link>
           );
         })}

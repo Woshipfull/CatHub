@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { makeAutoObservable, toJS } from 'mobx';
-import { createContext, useContext } from 'react';
 
 import { galleryContent } from './tempData';
 

@@ -90,53 +90,52 @@ const Breeds = observer(() => {
           </button>
           <div className="page-label">Breeds</div>
         </div>
-        <div className="page-controls">
-          <div className="breeds-controls">
-            <div className="breeds-select">
-              <div className="select">
-                <select
-                  name="breeds"
-                  value={breedsStore.getBreedFilter}
-                  onChange={changeBreed}
-                >
-                  <option value="all">All breeds</option>
-                  {renderBreedsSelect(breedsStore.getBreeds)}
-                </select>
-              </div>
+
+        <div className="breeds-controls">
+          <div className="breeds-select">
+            <div className="select">
+              <select
+                name="breeds"
+                value={breedsStore.getBreedFilter}
+                onChange={changeBreed}
+              >
+                <option value="all">All breeds</option>
+                {renderBreedsSelect(breedsStore.getBreeds)}
+              </select>
             </div>
-            <div className="limits_sorts">
-              <div className="select">
-                <select
-                  name="limits"
-                  value={breedsStore.getLimit}
-                  onChange={changeLimits}
-                >
-                  <option value="5">Limit: 5</option>
-                  <option value="10">Limit: 10</option>
-                  <option value="15">Limit: 15</option>
-                  <option value="20">Limit: 20</option>
-                </select>
-              </div>
-              <div className="sort-btns-container">
-                <button
-                  type="button"
-                  className={sortBtnClass('az')}
-                  onClick={addFilter('az')}
-                >
-                  <div className="btn-icon">
-                    <AiOutlineSortAscending />
-                  </div>
-                </button>
-                <button
-                  type="button"
-                  className={sortBtnClass('za')}
-                  onClick={addFilter('za')}
-                >
-                  <div className="btn-icon">
-                    <AiOutlineSortDescending />
-                  </div>
-                </button>
-              </div>
+          </div>
+          <div className="limits_sorts">
+            <div className="select">
+              <select
+                name="limits"
+                value={breedsStore.getLimit}
+                onChange={changeLimits}
+              >
+                <option value="5">Limit: 5</option>
+                <option value="10">Limit: 10</option>
+                <option value="15">Limit: 15</option>
+                <option value="20">Limit: 20</option>
+              </select>
+            </div>
+            <div className="sort-btns-container">
+              <button
+                type="button"
+                className={sortBtnClass('az')}
+                onClick={addFilter('az')}
+              >
+                <div className="btn-icon">
+                  <AiOutlineSortAscending />
+                </div>
+              </button>
+              <button
+                type="button"
+                className={sortBtnClass('za')}
+                onClick={addFilter('za')}
+              >
+                <div className="btn-icon">
+                  <AiOutlineSortDescending />
+                </div>
+              </button>
             </div>
           </div>
         </div>
