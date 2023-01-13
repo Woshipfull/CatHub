@@ -7,4 +7,12 @@
   align-self: end;
 
   overflow: hidden;
+
+  @media screen and (max-width: 550px) {
+    grid-template-columns: repeat(7, max-content);
+  }
+
+  @media screen and (max-width: 315px) {
+    grid-template-columns: repeat(5, max-content);
+  }
 }

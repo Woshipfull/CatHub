@@ -9,7 +9,7 @@ const LoginForm = () => {
 
   const navigate = useNavigate();
 
-  const inputClass = isValidText ? 'search-input' : 'search-input is-invalid';
+  const inputClass = isValidText ? 'login-input' : 'login-input is-invalid';
 
   const handleInputText = (e: { target: { value: string } }) =>
     setText(e.target.value);
@@ -26,10 +26,7 @@ const LoginForm = () => {
 
   return (
     <div>
-      <div>Welcome to CATHUB</div>
-      <div>bla-bla-bla Description</div>
-      <div>Enter your NickName</div>
-      <form className="search-form" onSubmit={handleSubmit}>
+      <form className="login-form" onSubmit={handleSubmit}>
         <input
           // eslint-disable-next-line jsx-a11y/no-autofocus
           autoFocus
@@ -40,7 +37,7 @@ const LoginForm = () => {
           onChange={handleInputText}
           onAnimationEnd={() => setIsValidText(true)}
         />
-        <button className="search-botton" type="submit">
+        <button className="login-btn" type="submit">
           <div className="btn-icon">
             <RiLoginCircleLine />
           </div>

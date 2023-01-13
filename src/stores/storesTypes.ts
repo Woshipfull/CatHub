@@ -26,8 +26,6 @@ export type AllBreedsForSelect = Array<BreedItemForSelect>;
 export type GalleryItem = {
   id: string;
   url: string;
-  width: number;
-  height: number;
 };
 
 export type GalleryColl = Array<GalleryItem>;
@@ -35,8 +33,9 @@ export type GalleryColl = Array<GalleryItem>;
 export type GalleryFilterState = {
   limit: string;
   order: string;
-  breed: string;
-  type: string;
+  breeds_ids?: string;
+  mime_types: string;
+  page: number;
 };
 
 export type VotesItem = {
@@ -57,13 +56,13 @@ export type VotesItem = {
 export type VotesColl = Array<VotesItem>;
 
 export type FavouritesItem = {
-  id: number,
-  imageId: string,
-  createdAt: string,
+  id: number;
+  imageId: string;
+  createdAt: string;
   image: {
-    id: string,
-    url: string,
-  }
+    id: string;
+    url: string;
+  };
 };
 
 export type FavouritesColl = Array<FavouritesItem>;

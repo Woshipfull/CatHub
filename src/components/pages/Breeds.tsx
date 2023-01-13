@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -6,22 +7,24 @@ import {
   AiOutlineSortAscending,
   AiOutlineSortDescending,
 } from 'react-icons/ai';
+import { BsFillCaretDownFill } from 'react-icons/bs';
 
 import breedsStore from '../../stores/BreedsStore';
 
 import { AllBreedsForSelect, BreedsColl } from '../../stores/storesTypes';
 
 import Pagination from '../parts/Pagination';
+import Spinner from '../parts/Spinner';
 
 const Breeds = observer(() => {
   const navigate = useNavigate();
+  const contentRef = useRef(document.createElement('div'));
 
   const changeLimits = (e: { target: { value: string } }) => {
     breedsStore.setLimit = +e.target.value;
   };
 
   const changeBreed = (e: { target: { value: string } }) => {
-    console.log(e.target.value);
     breedsStore.setBreedFilter = e.target.value;
   };
 
@@ -94,28 +97,38 @@ const Breeds = observer(() => {
         <div className="breeds-controls">
           <div className="breeds-select">
             <div className="select">
-              <select
-                name="breeds"
-                value={breedsStore.getBreedFilter}
-                onChange={changeBreed}
-              >
-                <option value="all">All breeds</option>
-                {renderBreedsSelect(breedsStore.getBreeds)}
-              </select>
+              <div className="select-input">
+                <select
+                  name="breeds"
+                  value={breedsStore.getBreedFilter}
+                  onChange={changeBreed}
+                >
+                  <option value="all">All breeds</option>
+                  {renderBreedsSelect(breedsStore.getBreeds)}
+                </select>
+                <div className="select-icon">
+                  <BsFillCaretDownFill />
+                </div>
+              </div>
             </div>
           </div>
           <div className="limits_sorts">
             <div className="select">
-              <select
-                name="limits"
-                value={breedsStore.getLimit}
-                onChange={changeLimits}
-              >
-                <option value="5">Limit: 5</option>
-                <option value="10">Limit: 10</option>
-                <option value="15">Limit: 15</option>
-                <option value="20">Limit: 20</option>
-              </select>
+              <div className="select-input">
+                <select
+                  name="limits"
+                  value={breedsStore.getLimit}
+                  onChange={changeLimits}
+                >
+                  <option value="5">Limit: 5</option>
+                  <option value="10">Limit: 10</option>
+                  <option value="15">Limit: 15</option>
+                  <option value="20">Limit: 20</option>
+                </select>
+                <div className="select-icon">
+                  <BsFillCaretDownFill />
+                </div>
+              </div>
             </div>
             <div className="sort-btns-container">
               <button
@@ -141,14 +154,21 @@ const Breeds = observer(() => {
         </div>
       </div>
 
-      <div className="scroll-content">
-        <div className="gallery-container">
-          {renderBreedsContent(breedsStore.getBreedsContent)}
-        </div>
-        <Pagination
-          getPage={breedsStore.getCurrentPage}
-          setPage={breedsStore.setCurrentPage}
-        />
+      <div className="scroll-content" ref={contentRef}>
+        {!breedsStore.isLoaded && <Spinner />}
+        {breedsStore.isLoaded && (
+          <>
+            <div className="gallery-container">
+              {renderBreedsContent(breedsStore.getBreedsContent)}
+            </div>
+            <Pagination
+              getPage={breedsStore.getCurrentPage}
+              setPage={breedsStore.setCurrentPage}
+              maxPage={breedsStore.getMaxPage}
+              contentRef={contentRef}
+            />
+          </>
+        )}
       </div>
     </>
   );

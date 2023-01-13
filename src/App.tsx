@@ -1,7 +1,15 @@
 import { useContext, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Media from 'react-media';
+import { uniq } from 'lodash';
+
+import { toast } from 'react-toastify';
+
 import { GlobalStore } from './stores/GlobalStore';
+import votesStore from './stores/VotesStore';
+import favouritesStore from './stores/FavouritesStore';
+import galleryStore from './stores/GalleryStore';
+import breedsStore from './stores/BreedsStore';
 
 import { PCLayout, TabletLayout } from './components/layouts/Layouts';
 import MainComponent from './components/layouts/MainComponent';
@@ -19,6 +27,7 @@ import Favourites from './components/pages/Favourites';
 const App = () => {
   const { state, dispatch } = useContext(GlobalStore);
   const currentLocation = useLocation();
+  const { userName } = window.localStorage;
 
   const mainClass =
     state.theme === 'dark' ? 'main-container dark' : 'main-container';
@@ -27,6 +36,24 @@ const App = () => {
     const currentPageName = currentLocation.pathname.split('/')[1];
     dispatch({ type: 'SET_CURRENT_PAGE', payload: currentPageName });
   }, [currentLocation.pathname, dispatch]);
+
+  useEffect(() => {
+    if (userName) {
+      votesStore.setSubId = userName;
+      favouritesStore.setSubId = userName;
+      galleryStore.setSubId = userName;
+    }
+  }, [userName]);
+
+  useEffect(() => {
+    const allErrors = [];
+    allErrors.push(breedsStore.getErrors);
+    allErrors.push(galleryStore.getErrors);
+    allErrors.push(votesStore.getErrors);
+    allErrors.push(favouritesStore.getErrors);
+    const filtered = uniq(allErrors.flat());
+    filtered.forEach((message) => toast.error(message));
+  }, []);
 
   return (
     <div className={mainClass}>

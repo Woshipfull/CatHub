@@ -10,21 +10,50 @@
     padding-left: 0.5rem;
   }
 
-  select {
-    height: 40px;
+  .select-input {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    font-family: 'Jost';
-    font-size: 15px;
-    border: 2px solid transparent;
     border-radius: 10px;
-    padding: 0 7px;
+    position: relative;
+
+    select {
+      height: 40px;
+      width: 100%;
+      font-family: 'Jost';
+      font-size: 15px;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      box-shadow: none;
+      appearance: none;
+
+      padding: 0 1rem;
+    }
+
+    .select-icon {
+      position: absolute;
+      height: 100%;
+      padding-right: 10px;
+      display: flex;
+      align-items: center;
+      right: 0;
+      svg {
+        font-size: 13px;
+      }
+
+      pointer-events: none;
+    }
+
+    :focus {
+      outline: none;
+    }
   }
 
   @media screen and (max-width: 400px) {
     .label {
       font-size: 0.5rem;
     }
-    select {
+    .select-input select {
       height: 32px;
     }
   }

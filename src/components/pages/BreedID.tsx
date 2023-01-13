@@ -1,5 +1,6 @@
 import { IoChevronBack } from 'react-icons/io5';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useState, useRef, useEffect } from 'react';
 
 import NoItemFound from '../parts/NoItemFound';
 
@@ -8,6 +9,10 @@ import breedsStore from '../../stores/BreedsStore';
 const BreedsId = () => {
   const { breedId } = useParams();
   const navigate = useNavigate();
+  const info = useRef(document.createElement('div'));
+
+  const [infoHeight, setInfoHeight] = useState(0);
+  const [infoMinHeight, setInfoMinHeight] = useState(100);
 
   const data = breedsStore.getBreedById(breedId);
 
@@ -17,10 +22,16 @@ const BreedsId = () => {
     }
     return (
       <div className="breed-id-content">
-        <div className="picture">
+        <div
+          className="picture"
+          style={{
+            height: `calc(100% - ${infoHeight}px)`,
+            minHeight: `${infoMinHeight}%`,
+          }}
+        >
           <img src={data.image.url} alt={data.name} />
         </div>
-        <div className="info">
+        <div className="info" ref={info}>
           <div className="title">
             <h1>{data.name}</h1>
           </div>
@@ -41,7 +52,7 @@ const BreedsId = () => {
 
                 <div className="option">
                   <span>Weight:&nbsp;</span>
-                  <span>{`${data.weight.metric} kgs`}</span>
+                  <span>{`${data.weight} kgs`}</span>
                 </div>
 
                 <div className="option">
@@ -55,6 +66,13 @@ const BreedsId = () => {
       </div>
     );
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setInfoHeight(info.current.offsetHeight + 1);
+      setInfoMinHeight(0);
+    }, 600);
+  }, []);
 
   return (
     <>

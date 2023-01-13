@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import Media from 'react-media';
 import { createPortal } from 'react-dom';
 
@@ -6,6 +6,9 @@ import { FileUploader } from 'react-drag-drop-files';
 import { BiUpload } from 'react-icons/bi';
 import { IoMdClose } from 'react-icons/io';
 import { CgCheckO, CgCloseO } from 'react-icons/cg';
+
+import galleryStore from '../../stores/GalleryStore';
+import { GlobalStore } from '../../stores/GlobalStore';
 
 type UploadStatus = 'notSent' | 'success' | 'failed';
 
@@ -15,14 +18,15 @@ const fileTypes = ['JPG', 'PNG'];
 const appRoot = document.getElementById('root')!;
 
 const UploadModal = () => {
+  const { state } = useContext(GlobalStore);
   const [showClass, setShowClass] = useState('');
+  const [themeClass, setThemeClass] = useState('');
   const [file, setFile] = useState<File | null>(null);
   const [uploadStatus, setUploadStatus] = useState<UploadStatus>('notSent');
 
   const statusClass = uploadStatus === 'failed' && 'failed';
 
   const handleChange = (fileData: File) => {
-    console.log(fileData);
     setFile(fileData);
   };
 
@@ -30,7 +34,9 @@ const UploadModal = () => {
     setShowClass(str);
   };
 
-  const handleSendPhoto = (str: UploadStatus) => () => setUploadStatus(str);
+  const handleSendPhoto = () => {
+    galleryStore.uploadPhoto(file);
+  };
 
   const draggingStateChange = (dragging: boolean) => console.log(dragging);
 
@@ -40,7 +46,7 @@ const UploadModal = () => {
         <button
           type="button"
           className="upload-btn btn-dark"
-          onClick={handleSendPhoto('failed')}
+          onClick={handleSendPhoto}
         >
           Upload photo
         </button>
@@ -60,6 +66,14 @@ const UploadModal = () => {
     </div>
   );
 
+  useEffect(() => {
+    if (state.theme === 'dark') {
+      setThemeClass(state.theme);
+    } else {
+      setThemeClass('');
+    }
+  }, [state.theme]);
+
   return (
     <>
       <button
@@ -73,7 +87,7 @@ const UploadModal = () => {
         Upload
       </button>
       {createPortal(
-        <div className={`upload-modal ${showClass}`}>
+        <div className={`upload-modal ${showClass} ${themeClass}`}>
           <Media
             queries={{
               pc: '(min-width: 1200px)',
@@ -82,7 +96,7 @@ const UploadModal = () => {
             {(matches) => (
               <>
                 {matches.pc ? <div className="window" /> : null}
-                <div className="window">
+                <div className="window upload">
                   <div className="content">
                     <div className="scroll-content">
                       <div className="upload-content">

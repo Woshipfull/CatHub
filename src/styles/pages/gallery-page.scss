@@ -1,6 +1,8 @@
 .gallery-content {
-  display: grid;
+  display: flex;
   gap: 15px;
+  height: 100%;
+  flex-direction: column;
 }
 
 .gallery-filters {

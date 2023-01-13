@@ -1,12 +1,15 @@
 import { HiHeart } from 'react-icons/hi';
 import { IoChevronBack } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 
 import favouritesStore from '../../stores/FavouritesStore';
 import { FavouritesColl } from '../../stores/storesTypes';
-import NoItemFound from '../parts/NoItemFound';
 
-const Favourites = () => {
+import NoItemFound from '../parts/NoItemFound';
+import Spinner from '../parts/Spinner';
+
+const Favourites = observer(() => {
   const navigate = useNavigate();
 
   const renderGalleryContent = (array: FavouritesColl) => {
@@ -28,6 +31,7 @@ const Favourites = () => {
                     <button
                       type="button"
                       className="btn sm-btn btn-light active"
+                      onClick={() => favouritesStore.removeFromFavourite(image.id)}
                     >
                       <div className="btn-icon heart-icon">
                         <HiHeart />
@@ -47,6 +51,7 @@ const Favourites = () => {
 
     return result;
   };
+
   return (
     <>
       <div className="controls">
@@ -64,16 +69,22 @@ const Favourites = () => {
         </div>
       </div>
       <div className="scroll-content">
-        <div className="gallery-container">
-          {favouritesStore.getFavourites.length > 0 ? (
-            renderGalleryContent(favouritesStore.getFavourites)
-          ) : (
-            <NoItemFound message="You haven't added any cats to Favourites yet!" link />
-          )}
-        </div>
+        {!favouritesStore.isLoaded && <Spinner />}
+        {favouritesStore.isLoaded && (
+          <div className="gallery-container">
+            {favouritesStore.getFavourites.length > 0 ? (
+              renderGalleryContent(favouritesStore.getFavourites)
+            ) : (
+              <NoItemFound
+                message="You haven't added any cats to Favourites yet!"
+                link
+              />
+            )}
+          </div>
+        )}
       </div>
     </>
   );
-};
+});
 
 export default Favourites;

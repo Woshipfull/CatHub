@@ -5,6 +5,7 @@ import LoginForm from '../parts/LoginForm';
 
 const StartPage = () => {
   const { userName } = window.localStorage;
+
   return (
     <div className="start-page-container">
       <div className="start-page">
@@ -26,7 +27,15 @@ const StartPage = () => {
             </div>
           </>
         ) : (
-          <LoginForm />
+          <>
+            <div className="welcome">
+              <h1>
+                <span> Hello! </span>
+              </h1>
+              <h1>To get started, enter your nickname:</h1>
+            </div>
+            <LoginForm />
+          </>
         )}
       </div>
     </div>

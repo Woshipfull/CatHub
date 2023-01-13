@@ -3,24 +3,60 @@ $dark: #1d1d1d;
 $pink-light: #fbe0dc;
 $another-light: #ffd280;
 $pink: #ff868e;
+$pink_20per: rgba(255, 134, 142, 0.2);
 $white: #fff;
+$white_5per: rgba(255, 255, 255, 0.05);
 $grey: #8c8c8c;
 $grey-light: #f8f8f7;
 $success: #97eab9;
+$dark-upload: #282828;
 
 .main-container {
   --bg-color: #{$light};
-  --bg-color-home: #{$pink-light};
+  --bg-color-content: #{$white};
+  --bg-primary: #{$grey-light};
+  --bg-secondary: #{$white};
+  --bg-btn-dark: #{$pink-light};
+  --bg-btn-light-hover: #{$pink-light};
+  --bg-home: #{$pink-light};
+  --bg-votes-history-item: #{$grey-light};
+
+  --border-votes-block: #{$pink-light};
+
+  --text-color-primary: #{$dark};
+  --text-color-secondary: #{$dark};
 
   background-color: var(--bg-color);
 
+  transition-property: color, background-color, border-color;
+  transition-duration: 300ms;
+
   .content {
-    background-color: #{$white};
+    background-color: var(--bg-color-content);
+
+    transition-property: color, background-color, border-color;
+    transition-duration: 300ms;
   }
 }
 
+.main-container.dark {
+  --bg-color: #{$dark};
+  --bg-color-content: #{$white_5per};
+  --bg-home: #{$white_5per};
+  --bg-primary: #{$white_5per};
+  --bg-secondary: #{$dark};
+  --bg-btn-dark: #{$pink_20per};
+  --bg-votes-history-item: #{$white_5per};
+  --bg-btn-light-hover: #{$pink_20per};
+
+  --border-votes-block: #{$pink_20per};
+
+  --text-color-primary: #{$white};
+  --text-color-secondary: #{$grey-light};
+}
+
 .home {
-  background-color: var(--bg-color-home);
+  background-color: var(--bg-home);
 }
 
 .menu {
@@ -29,7 +65,7 @@ $success: #97eab9;
 
 .theme-swither {
   .theme-icon {
-    background-color: #{$pink-light};
+    background-color: var(--bg-btn-dark);
     color: #{$pink};
   }
   .slider {
@@ -39,7 +75,7 @@ $success: #97eab9;
     background-color: white;
   }
   input:checked + .slider {
-    background-color: #2196f3;
+    background-color: $pink;
   }
 
   input:focus + .slider {
@@ -48,43 +84,58 @@ $success: #97eab9;
 }
 
 .logo {
-  color: #{$dark};
+  color: var(--text-color-secondary);
+  transition-property: color, background-color, border-color;
+  transition-duration: 300ms;
   :nth-child(2) {
-    background-color: rgb(255, 149, 0);
+    // background-color: rgb(255, 149, 0);
+    background-color: $pink;
   }
   &:hover {
-    background-color: #{$pink-light};
+    background-color: var(--bg-btn-dark);
   }
 }
 
 .select {
+  outline-color: $pink;
   select {
-    background-color: #{$grey-light};
+    background-color: var(--bg-primary);
     color: #{$grey};
   }
 
   &.secondary {
     color: #{$grey};
     select {
-      background-color: #{$white};
-      color: #{$dark};
+      background-color: var(--bg-secondary);
+      color: var(--text-color-primary);
     }
+  }
+
+  .select-icon {
+    color: $grey;
+  }
+
+  :focus {
+    border-color: $pink;
   }
 }
 
 .btn-light {
-  background-color: #{$white};
+  background-color: var(--bg-secondary);
+
+  transition-property: color, background-color, border-color;
+  transition-duration: 300ms;
   svg {
     color: #{$pink};
   }
 
   .heart-icon svg {
     stroke: #{$pink};
-    fill: #{$white};
+    fill: var(--bg-secondary);
   }
 
   &:hover {
-    background-color: #{$pink-light};
+    background-color: var(--bg-btn-light-hover);
     .heart-icon svg {
       fill: #{$pink};
     }
@@ -116,12 +167,15 @@ $success: #97eab9;
 }
 
 .btn-dark {
-  background-color: #{$pink-light};
+  background-color: var(--bg-btn-dark);
   color: #{$pink};
+
+  transition-property: color, background-color, border-color;
+  transition-duration: 300ms;
 
   .heart-icon svg {
     stroke: #{$pink};
-    fill: #{$pink-light};
+    fill: var(--bg-btn-dark);
   }
 
   &:hover {
@@ -146,11 +200,17 @@ $success: #97eab9;
 }
 
 .btn-primary {
-  background-color: #{$grey-light};
+  background-color: var(--bg-primary);
   border: 2px solid transparent;
   color: #{$grey};
+
+  transition-property: color, background-color, border-color;
+  transition-duration: 300ms;
+
   svg {
     color: #{$grey};
+    transition-property: color, background-color, border-color;
+    transition-duration: 300ms;
   }
   &:hover {
     color: #{$pink};
@@ -169,10 +229,6 @@ $success: #97eab9;
 
 .menu-btn {
   background-color: transparent;
-}
-
-.main-container.dark {
-  --bg-color: #{$dark};
 }
 
 .gallery .overlay {
@@ -194,6 +250,9 @@ $success: #97eab9;
   background-color: #{$grey-light};
   color: #{$pink};
 
+  transition-property: color, background-color, border-color;
+  transition-duration: 300ms;
+
   &:hover {
     color: #{$grey};
   }
@@ -212,17 +271,26 @@ $success: #97eab9;
 }
 
 .no-item {
-  background-color: $grey-light;
+  background-color: var(--bg-votes-history-item);
   color: $grey;
 }
 
 .gallery-filters {
-  background-color: $grey-light;
+  background-color: var(--bg-primary);
+  transition-property: color, background-color, border-color;
+  transition-duration: 300ms;
 }
 
 .navigation {
   .username {
-    background-image: linear-gradient(90deg, $white, 80%, transparent);
+    transition-property: color, background-color, border-color;
+    transition-duration: 300ms;
+    background-image: linear-gradient(
+      90deg,
+      var(--bg-color-content),
+      80%,
+      transparent
+    );
     span {
       color: $pink;
     }
@@ -231,11 +299,15 @@ $success: #97eab9;
   .page-links .nav-card {
     .nav-image {
       border-color: rgba(255, 255, 255, 0.6);
+      transition-property: color, background-color, border-color;
+      transition-duration: 300ms;
     }
 
     .nav-btn {
-      background-color: #{$white};
+      background-color: var(--bg-color-content);
       color: #{$pink};
+      transition-property: color, background-color, border-color;
+      transition-duration: 300ms;
     }
 
     &:hover {
@@ -244,7 +316,7 @@ $success: #97eab9;
       }
 
       .nav-btn {
-        background-color: #{$pink-light};
+        background-color: var(--bg-btn-light-hover);
       }
     }
 
@@ -280,12 +352,36 @@ $success: #97eab9;
 }
 
 .upload-modal {
+  &.dark {
+    .content {
+      background-color: $dark-upload;
+    }
+    .upload-title {
+      color: white;
+    }
+    .upload-input {
+      background-color: $white_5per;
+      .upload-default-img {
+        filter: brightness(0.3);
+      }
+    }
+    .upload-input-label {
+      color: $pink;
+      span {
+        color: $pink-light;
+      }
+    }
+  }
   .content {
     background-color: $grey-light;
   }
 
   &.show {
     animation: fadeIn 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+
+  .upload-title {
+    color: $dark;
   }
 
   .upload-description {
@@ -338,7 +434,7 @@ $success: #97eab9;
 
 .votes-content {
   .votes-item {
-    border-color: $pink-light;
+    border-color: var(--border-votes-block);
   }
 
   .votes-item-title {
@@ -352,17 +448,17 @@ $success: #97eab9;
   }
 
   .history-card {
-    background-color: $grey-light;
+    background-color: var(--bg-votes-history-item);
 
     .history-date-container {
-      background-color: $white;
+      background-color: var(--bg-color-content);
       color: $grey;
     }
 
     .history-text {
       color: $grey;
       .img-id {
-        color: $dark;
+        color: var(--text-color-primary);
       }
     }
 
@@ -394,4 +490,57 @@ $success: #97eab9;
   }
 }
 
-// ----------  SEARCH  -------------
+.login-form {
+  .login-input {
+    border-color: transparent;
+    background-color: var(--bg-color-content);
+    color: var(--text-color-primary);
+    &::placeholder {
+      color: #{$grey};
+    }
+
+    &:-ms-input-placeholder {
+      color: #{$grey};
+    }
+
+    &::-ms-input-placeholder {
+      color: #{$grey};
+    }
+
+    &.is-invalid {
+      animation: borderFlash 0.7s ease;
+      animation-play-state: running;
+    }
+  }
+  .login-btn {
+    background: var(--bg-btn-dark);
+    color: #{$pink};
+
+    &:hover {
+      background: #{$pink};
+      color: #{$white};
+    }
+  }
+}
+
+@keyframes borderFlash {
+  0% {
+    border-color: transparent;
+  }
+  25% {
+    border-color: #{$pink};
+  }
+  50% {
+    border-color: transparent;
+  }
+  75% {
+    border-color: #{$pink};
+  }
+  100% {
+    border-color: transparent;
+  }
+}
+
+.lds-roller div:after {
+  background: #{$pink};
+}

@@ -1,8 +1,14 @@
+import { FC } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import Navigation from './Navigation';
 import ThemeSwitcher from './ThemeSwitcher';
 
-const Menu = ({ show, setShow }) => {
+type Props = {
+  show: boolean;
+  setShow: (arg: boolean) => void;
+};
+
+const Menu: FC<Props> = ({ show, setShow }) => {
   const menuClass = show ? 'menu' : 'menu hidden';
   return (
     <div className={menuClass}>

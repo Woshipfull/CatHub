@@ -1,5 +1,6 @@
-import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
+import { useContext } from 'react';
 
 import { RiLogoutCircleLine } from 'react-icons/ri';
 import { HiHeart } from 'react-icons/hi';
@@ -14,7 +15,7 @@ type NavItem = {
 type NavItemsArray = NavItem[];
 
 type NavProps = {
-  setShowMenu?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
+  setShowMenu?: (arg: boolean) => void;
 };
 
 const navItemsArray: NavItemsArray = [
@@ -25,14 +26,19 @@ const navItemsArray: NavItemsArray = [
 
 const Navigation: React.FC<NavProps> = ({ setShowMenu }) => {
   const navigate = useNavigate();
+  const { state } = useContext(GlobalStore);
 
   const { userName } = window.localStorage;
-  const { state } = useContext(GlobalStore);
-  const { currentPage } = state;
 
   const handleLogout = () => {
     window.localStorage.clear();
     navigate('/');
+  };
+
+  const handleClose = () => {
+    if (setShowMenu) {
+      setShowMenu(false);
+    }
   };
 
   return (
@@ -42,7 +48,7 @@ const Navigation: React.FC<NavProps> = ({ setShowMenu }) => {
           <span>{userName}</span>
         </div>
         <div className="user-btns">
-          <Link to="favourites" onClick={() => setShowMenu(false)}>
+          <Link to="favourites" onClick={handleClose}>
             <button type="button" className="btn btn-dark sm-btn">
               <div className="btn-icon">
                 <HiHeart />
@@ -63,14 +69,14 @@ const Navigation: React.FC<NavProps> = ({ setShowMenu }) => {
       <div className="page-links">
         {navItemsArray.map((item: NavItem) => {
           const btnClass =
-            currentPage === item.href ? 'nav-card active' : 'nav-card';
+            state.currentPage === item.href ? 'nav-card active' : 'nav-card';
 
           return (
             <Link
               key={item.href}
               to={item.href}
               className={btnClass}
-              onClick={() => setShowMenu(false)}
+              onClick={handleClose}
             >
               <div className="nav-image">
                 <img src={item.imgSrc} alt={item.href} />

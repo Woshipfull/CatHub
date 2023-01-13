@@ -19,13 +19,16 @@
 }
 
 .breed-id-content {
-  display: grid;
-  grid-template-rows: 1fr max-content;
-  // height: 10%;
-  // grid-auto-flow: dense;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
 
   .picture {
     display: flex;
+    // min-height: 100%;
+    transition-property: height min-height;
+    transition-duration: 1500ms;
 
     img {
       border-radius: 20px;
@@ -36,7 +39,8 @@
   }
 
   .info {
-    display: grid;
+    display: flex;
+    flex-direction: column;
 
     .title {
       display: grid;

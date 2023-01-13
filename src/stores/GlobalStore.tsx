@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { Reducer, useMemo, useReducer } from 'react';
 
 type GlobalStoreType = {
   theme: string;
@@ -19,33 +19,57 @@ const initState: GlobalStoreType = {
   currentPage: 'home',
 };
 
-const reducer = (state: GlobalStoreType, action: Action) => {
+const themeReducer: Reducer<string, Action> = (
+  state: string,
+  action: Action,
+) => {
   switch (action.type) {
     case 'CHANGE_THEME':
-      return {
-        ...state,
-        theme: state.theme === 'light' ? 'dark' : 'light',
-      };
-    case 'SET_CURRENT_PAGE':
-      return {
-        ...state,
-        currentPage: action.payload,
-      };
+      return state === 'light' ? 'dark' : 'light';
     default:
       return state;
   }
 };
 
-const GlobalStore = React.createContext(initState);
+const changeCurrentPageReducer: Reducer<string, Action> = (
+  state: string,
+  action: Action,
+) => {
+  switch (action.type) {
+    case 'SET_CURRENT_PAGE':
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+const GlobalStore = React.createContext<{
+  state: GlobalStoreType;
+  dispatch: React.Dispatch<Action>;
+}>({
+  state: initState,
+  dispatch: () => null,
+});
+
+const mainReducer = (
+  { theme, currentPage }: GlobalStoreType,
+  action: Action,
+) => ({
+  theme: themeReducer(theme, action),
+  currentPage: changeCurrentPageReducer(currentPage, action),
+});
 
 const GlobalStoreProvider: React.FC<Props> = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initState);
-
-  return (
-    <GlobalStore.Provider value={{ state, dispatch }}>
-      {children}
-    </GlobalStore.Provider>
+  const [state, dispatch] = useReducer(mainReducer, initState);
+  const value = useMemo(
+    () => ({
+      state,
+      dispatch,
+    }),
+    [state],
   );
+
+  return <GlobalStore.Provider value={value}>{children}</GlobalStore.Provider>;
 };
 
 export default GlobalStoreProvider;

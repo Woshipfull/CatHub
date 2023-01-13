@@ -14,7 +14,9 @@ import {
 import votesStore from '../../stores/VotesStore';
 import favouritesStore from '../../stores/FavouritesStore';
 import { VotesColl } from '../../stores/storesTypes';
+
 import NoItemFound from '../parts/NoItemFound';
+import Spinner from '../parts/Spinner';
 
 type ControlBTN = {
   name: string;
@@ -28,6 +30,11 @@ const votesControls: VotesControls = [
   { name: 'disliked', icon: <BsEmojiFrown /> },
   { name: 'history', icon: <BsClockHistory /> },
 ];
+
+const makeFavourite = {
+  add: (imgId: string) => () => favouritesStore.addToFavourite(imgId),
+  remove: (imgId: string) => () => favouritesStore.removeFromFavourite(imgId),
+};
 
 const Votes = observer(() => {
   const navigate = useNavigate();
@@ -70,7 +77,11 @@ const Votes = observer(() => {
           <div className="overlay">
             <div className="vote-btns">
               <div className="like-dislike">
-                <button type="button" className="btn sm-btn btn-light active">
+                <button
+                  type="button"
+                  className="btn sm-btn btn-light active"
+                  onClick={() => votesStore.addVote(image.id, 0)}
+                >
                   <div className="btn-icon">
                     {btn === 'liked' && <BsEmojiSmile />}
                     {btn === 'disliked' && <BsEmojiFrown />}
@@ -81,6 +92,11 @@ const Votes = observer(() => {
                   className={`btn sm-btn btn-light ${
                     isInFavourites(image.id) && 'active'
                   }`}
+                  onClick={
+                    !isInFavourites(image.id)
+                      ? makeFavourite.add(image.id)
+                      : makeFavourite.remove(image.id)
+                  }
                 >
                   <div className="btn-icon heart-icon">
                     <HiHeart />
@@ -206,7 +222,10 @@ const Votes = observer(() => {
         </div>
       </div>
       <div className="scroll-content">
-        <div className="votes-content">{renderEntities()}</div>
+        {!votesStore.isLoaded && <Spinner />}
+        {votesStore.isLoaded && (
+          <div className="votes-content">{renderEntities()}</div>
+        )}
       </div>
     </>
   );

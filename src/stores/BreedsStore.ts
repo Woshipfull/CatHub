@@ -1,10 +1,9 @@
-import { makeAutoObservable, toJS } from 'mobx';
+import { makeAutoObservable, toJS, runInAction } from 'mobx';
 import sortBy from 'lodash/sortBy';
 import find from 'lodash/find';
 
 import { Breed, BreedsColl, AllBreedsForSelect } from './storesTypes';
-
-import { breedContent } from './tempData';
+import { getBreedsContent, getBreedsForSelect } from './requests';
 
 export class BreedsStore {
   public breedsContent: BreedsColl = [];
@@ -18,6 +17,10 @@ export class BreedsStore {
   public sortBy = 'default';
 
   public currentPage = 1;
+
+  public errors: string[] = [];
+
+  private loaded = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -44,7 +47,6 @@ export class BreedsStore {
 
   set setLimit(newLimit: number) {
     this.limit = newLimit;
-    console.log(this.limit);
   }
 
   get getBreedFilter() {
@@ -63,13 +65,25 @@ export class BreedsStore {
     this.sortBy = newSortBy;
   }
 
+  get isLoaded() {
+    return this.loaded;
+  }
+
+  get getErrors() {
+    return toJS(this.errors);
+  }
+
   get getCurrentPage() {
     return this.currentPage;
   }
 
-  set setCurrentPage(newCurrentPage: number) {
-    this.currentPage = newCurrentPage;
+  get getMaxPage() {
+    return Math.ceil(this.breedsContent.length / this.limit);
   }
+
+  setCurrentPage = (newCurrentPage: number): void => {
+    this.currentPage = newCurrentPage;
+  };
 
   getBreedById = (breedID: string | undefined): Breed | undefined => {
     const coll = toJS(this.breedsContent);
@@ -95,11 +109,30 @@ export class BreedsStore {
   }
 
   initDataStore() {
-    this.breedsContent = breedContent;
-    this.allBreeds = breedContent.map((item) => ({
-      id: item.id,
-      name: item.name,
-    }));
+    getBreedsContent().then((response) => {
+      if (typeof response === 'string') {
+        runInAction(() => {
+          this.errors.push(response);
+        });
+        return;
+      }
+      runInAction(() => {
+        this.breedsContent = response;
+      });
+    });
+    getBreedsForSelect().then((response) => {
+      if (typeof response === 'string') {
+        runInAction(() => {
+          this.errors.push(response);
+        });
+        return;
+      }
+      runInAction(() => {
+        this.errors = [];
+        this.allBreeds = response;
+        this.loaded = true;
+      });
+    });
   }
 }
 

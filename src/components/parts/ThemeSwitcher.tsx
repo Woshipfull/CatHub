@@ -4,21 +4,24 @@ import { GlobalStore } from '../../stores/GlobalStore';
 
 const ThemeSwitcher = () => {
   const { state, dispatch } = useContext(GlobalStore);
-  const { theme } = state;
 
-  // console.log(state);
-
-  const handleChangeTheme = () =>
+  const handleChangeTheme = () => {
     dispatch({ type: 'CHANGE_THEME' });
+  };
 
   return (
     <div className="theme-swither">
-      <div className="theme-icon" onClick={handleChangeTheme}>
-        {theme === 'light' ? <FiSun /> : <FiMoon />}
-      </div>
+      <button type="button" className="theme-icon" onClick={handleChangeTheme}>
+        {state.theme === 'light' ? <FiSun /> : <FiMoon />}
+      </button>
       <form>
         <label className="switch" htmlFor="themeSwitcher">
-          <input id="themeSwitcher" type="checkbox" checked={theme === 'dark'} onChange={handleChangeTheme}/>
+          <input
+            id="themeSwitcher"
+            type="checkbox"
+            checked={state.theme === 'dark'}
+            onChange={handleChangeTheme}
+          />
           <span className="slider round" />
         </label>
       </form>

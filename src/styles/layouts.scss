@@ -20,8 +20,17 @@
   width: 100%;
   height: 100%;
   display: grid;
+  grid-template-rows: 1fr;
   gap: 7px;
   overflow: hidden;
+
+  @media screen and (max-width: 1200px) {
+    grid-template-rows: max-content 1fr;
+  }
+
+  &.upload {
+    grid-template-rows: 1fr;
+  }
 }
 
 .content {
@@ -92,6 +101,10 @@
     .breadcrumb {
       display: flex;
       gap: 7px;
+
+      @media screen and (max-width: 700px) {
+        flex-wrap: wrap;
+      }
 
       .page-label {
         display: flex;
