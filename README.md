@@ -3,7 +3,7 @@
 Welcome to my educational project **"CatHub"**
 
 
-**Link:** https://tic-tac-toe-topaz-gamma.vercel.app
+**Link:** https://cat-hub-woshipfull.vercel.app/
 
 ## Tech Stack
 
