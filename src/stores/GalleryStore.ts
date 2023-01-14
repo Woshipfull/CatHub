@@ -3,7 +3,8 @@ import { omit } from 'lodash';
 
 import { getGalleryContent, upload } from './requests';
 
-import { GalleryColl, GalleryFilterState } from './storesTypes';
+import { GalleryColl, GalleryFilterState, UploadState } from './storesTypes';
+import favouritesStore from './FavouritesStore';
 
 export class GalleryStore {
   private galleryContent: GalleryColl = [];
@@ -22,7 +23,11 @@ export class GalleryStore {
 
   private subId = '';
 
-  public errors: string[] = [];
+  private errors: string[] = [];
+
+  private file: File | null = null;
+
+  private uploadState: UploadState = 'noFile';
 
   constructor() {
     makeAutoObservable(this);
@@ -62,14 +67,45 @@ export class GalleryStore {
     this.subId = str;
   }
 
+  get getFile() {
+    return this.file;
+  }
+
+  set setFile(file: File | null) {
+    this.file = file;
+    this.uploadState = 'waiting';
+  }
+
+  get getUploadState() {
+    return this.uploadState;
+  }
+
   setPage = (number: number) => {
     this.galleryFilterState.page = number - 1;
     this.galleryContent = [];
     this.fetchData();
   };
 
-  uploadPhoto = (path: string) => {
-    upload(path, this.subId).then((response) => console.log(response));
+  uploadPhoto = () => {
+    if (this.file) {
+      this.uploadState = 'sending';
+      const formData = new FormData();
+      formData.append('file', this.file);
+      formData.append('sub_id', this.subId);
+      upload(formData).then((response) => {
+        console.log(response);
+        if (typeof response === 'string') {
+          runInAction(() => {
+            this.uploadState = 'failed';
+          });
+          return;
+        }
+        runInAction(() => {
+          this.uploadState = 'success';
+          favouritesStore.addToFavourite(response.id);
+        });
+      });
+    }
   };
 
   fetchData = () => {

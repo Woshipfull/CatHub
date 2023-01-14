@@ -14,7 +14,6 @@ const instance = axios.create({
   headers: {
     'x-api-key':
       'live_l0jg8zbQbuegTARZ4rYZFBIMdYRJwR0pMBMgrtvknJ1Ot9ocNbsJfGTrirSLJOiO',
-    'content-type': 'application/json',
   },
 });
 
@@ -89,13 +88,19 @@ export const getGalleryContent = (requestQueryParams: GalleryFilterState) =>
     })
     .catch((error) => error.message);
 
-export const upload = (path: string, subId: string) =>
-  instance
-    .post('images/upload2', {
-      file: path,
-      sub_id: subId,
-    })
-    .then((response) => response);
+export const upload = (formData: FormData) =>
+  axios({
+    method: 'post',
+    url: 'https://api.thecatapi.com/v1/images/upload',
+    data: formData,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      'x-api-key':
+        'live_l0jg8zbQbuegTARZ4rYZFBIMdYRJwR0pMBMgrtvknJ1Ot9ocNbsJfGTrirSLJOiO',
+    },
+  })
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
 
 // ---------   VOTES   ----------
 

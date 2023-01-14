@@ -5,9 +5,13 @@ type GlobalStoreType = {
   currentPage: string;
 };
 
-type Action = {
+type ThemeAction = {
   type: string;
-  payload?: string;
+};
+
+type ChangeCurrentPageAction = {
+  type: string;
+  payload: string;
 };
 
 interface Props {
@@ -19,9 +23,9 @@ const initState: GlobalStoreType = {
   currentPage: 'home',
 };
 
-const themeReducer: Reducer<string, Action> = (
+const themeReducer: Reducer<string, ThemeAction> = (
   state: string,
-  action: Action,
+  action: ThemeAction,
 ) => {
   switch (action.type) {
     case 'CHANGE_THEME':
@@ -31,9 +35,9 @@ const themeReducer: Reducer<string, Action> = (
   }
 };
 
-const changeCurrentPageReducer: Reducer<string, Action> = (
+const changeCurrentPageReducer: Reducer<string, ChangeCurrentPageAction> = (
   state: string,
-  action: Action,
+  action: ChangeCurrentPageAction,
 ) => {
   switch (action.type) {
     case 'SET_CURRENT_PAGE':
@@ -45,7 +49,7 @@ const changeCurrentPageReducer: Reducer<string, Action> = (
 
 const GlobalStore = React.createContext<{
   state: GlobalStoreType;
-  dispatch: React.Dispatch<Action>;
+  dispatch: React.Dispatch<ChangeCurrentPageAction>;
 }>({
   state: initState,
   dispatch: () => null,
@@ -53,7 +57,7 @@ const GlobalStore = React.createContext<{
 
 const mainReducer = (
   { theme, currentPage }: GlobalStoreType,
-  action: Action,
+  action: ChangeCurrentPageAction,
 ) => ({
   theme: themeReducer(theme, action),
   currentPage: changeCurrentPageReducer(currentPage, action),

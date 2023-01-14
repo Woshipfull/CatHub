@@ -38,6 +38,8 @@ export type GalleryFilterState = {
   page: number;
 };
 
+export type UploadState = 'noFile' | 'waiting' | 'sending' | 'failed' | 'success';
+
 export type VotesItem = {
   id: number;
   imageId: string;

@@ -9,7 +9,7 @@ $white_5per: rgba(255, 255, 255, 0.05);
 $grey: #8c8c8c;
 $grey-light: #f8f8f7;
 $success: #97eab9;
-$dark-upload: #282828;
+$dark-upload: #292928;
 
 .main-container {
   --bg-color: #{$light};
@@ -21,10 +21,13 @@ $dark-upload: #282828;
   --bg-home: #{$pink-light};
   --bg-votes-history-item: #{$grey-light};
 
+  --bg-breedsid-title: #{$white};
+
   --border-votes-block: #{$pink-light};
 
   --text-color-primary: #{$dark};
   --text-color-secondary: #{$dark};
+  --text-color-grey-pink-light: #{$grey};
 
   background-color: var(--bg-color);
 
@@ -49,10 +52,13 @@ $dark-upload: #282828;
   --bg-votes-history-item: #{$white_5per};
   --bg-btn-light-hover: #{$pink_20per};
 
+  --bg-breedsid-title: #{$dark-upload};
+
   --border-votes-block: #{$pink_20per};
 
   --text-color-primary: #{$white};
   --text-color-secondary: #{$grey-light};
+  --text-color-grey-pink-light: #{$pink-light};
 }
 
 .home {
@@ -237,8 +243,10 @@ $dark-upload: #282828;
 
 .breadcrumb {
   .page-label {
-    background-color: #{$pink-light};
+    background-color: var(--bg-btn-light-hover);
     color: #{$pink};
+    transition-property: color, background-color, border-color;
+    transition-duration: 200ms;
   }
   > :last-child {
     background-color: #{$pink};
@@ -258,14 +266,23 @@ $dark-upload: #282828;
   }
 }
 
-.breed-id-content .info .box {
-  border-color: $pink;
-  .description {
-    color: $grey;
+.breed-id-content .info {
+  color: var(--text-color-primary);
+  .title h1 {
+    background-color: var(--bg-breedsid-title);
+
+    transition-property: color, background-color, border-color;
+    transition-duration: 200ms;
   }
-  .option {
-    :nth-child(2) {
-      color: $grey;
+  .box {
+    border-color: $pink;
+    .description {
+      color: var(--text-color-grey-pink-light);
+    }
+    .option {
+      :nth-child(2) {
+        color: var(--text-color-grey-pink-light);
+      }
     }
   }
 }
@@ -371,6 +388,12 @@ $dark-upload: #282828;
         color: $pink-light;
       }
     }
+    .upload-spinner {
+      background-color: transparent;
+      .lds-ellipsis div {
+        background: $pink;
+      }
+    }
   }
   .content {
     background-color: $grey-light;
@@ -419,6 +442,13 @@ $dark-upload: #282828;
 
     .svg-failed {
       color: $pink;
+    }
+  }
+
+  .upload-spinner {
+    background-color: $pink;
+    .lds-ellipsis div {
+      background: #fff;
     }
   }
 }
