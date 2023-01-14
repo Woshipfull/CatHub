@@ -6,7 +6,10 @@ const ThemeSwitcher = () => {
   const { state, dispatch } = useContext(GlobalStore);
 
   const handleChangeTheme = () => {
-    dispatch({ type: 'CHANGE_THEME' });
+    dispatch({
+      type: 'CHANGE_THEME',
+      payload: '',
+    });
   };
 
   return (
