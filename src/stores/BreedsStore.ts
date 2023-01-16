@@ -47,6 +47,7 @@ export class BreedsStore {
 
   set setLimit(newLimit: number) {
     this.limit = newLimit;
+    this.currentPage = 1;
   }
 
   get getBreedFilter() {

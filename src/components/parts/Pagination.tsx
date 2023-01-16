@@ -98,11 +98,15 @@ const Pagination: FC<Props> = ({ getPage, setPage, maxPage, contentRef }) => {
 
   const renderSmallPagination = () => {
     const pageNumbers: number[] = [];
-    if (maxPage <= 5 && getPage < 4) {
+    if (maxPage <= 5) {
       for (let i = 1; i <= maxPage; i += 1) {
         pageNumbers.push(i);
       }
-    } else if (maxPage > 5 && getPage <= maxPage - 2) {
+    } else if (maxPage > 5 && getPage < 3) {
+      for (let i = 1; i <= 5; i += 1) {
+        pageNumbers.push(i);
+      }
+    } else if (maxPage > 5 && getPage > 2 && getPage < maxPage - 2) {
       const endPoint = getPage + 2;
       for (let i = -2; getPage + i <= endPoint; i += 1) {
         pageNumbers.push(getPage + i);
